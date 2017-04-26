@@ -42,18 +42,23 @@ import java.util.Iterator;
 	}
 
 		
-		//            name                   gender       birthyear       mother name   fathers name
+		/*
+		 * We store Person objects for the mother and father because they are seperate people.
+		 * We can also compare these as well 
+		 */
 		public Person(String name, String gender, int birthYear, Person mother, Person father) {
 			super();
 			this.name = name;
 			this.gender = gender;
 			this.birthYear = birthYear;
-			this.mother = mother;
-			this.father = father;
+			this.mother = (Person)mother;
+			this.father = (Person)father;
 		
 		}
 
 
+
+	
 
 		public String getName() {
 			return name;
@@ -111,8 +116,8 @@ import java.util.Iterator;
 			return father;
 		}
 
-		public void setFather(Person father) {
-			this.father = father;
+		public void setFather(Person item) {
+			this.father = (Person )item;
 		}
 
 	

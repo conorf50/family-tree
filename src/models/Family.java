@@ -13,7 +13,7 @@ public class Family<T extends Comparable<T>> {
 	private Person root;
 	//  This HashMap stores the leaves, or the bottoms of the nodes. The Character is the letter and the String is
 	// the binary code obtained from traversing the tree
-	public static Map <Character, String> mp  = new HashMap <Character, String>();
+	public static Map <String, String> mp  = new HashMap <String, String>();
 
 	public Family(Person root) {
 		this.setRoot(root);
@@ -47,26 +47,6 @@ public class Family<T extends Comparable<T>> {
 	}
 
 	
-//	public void traverse(){
-//		traverseR(root, " ");
-//	}
-//
-//	private void traverseR(Person root, String prefix ){
-//		
-//			if (root.getLeftPtr() != null){
-//				traverseR(root.getLeftPtr(), prefix +"0");
-//			}
-//			
-//
-//			if (root.getRightPtr() != null){
-//				traverseR(root.getRightPtr(), prefix +"1");
-//			}
-//			
-//			if ((root.getLeftPtr() == null) && (root.getRightPtr() == null)){
-//				mp.put(root.getCharacter(), prefix);
-//			}
-//			
-		//	System.out.println(mp.toString());
-	}
 	
+}
 

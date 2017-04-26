@@ -17,7 +17,7 @@ public class FileIO <T extends Comparable<T>> implements Iterable<T>{
 	final HashMap<String, Person> people  = new HashMap<String, Person> ();
 	
 	// map that contains all relationships
-	final HashMap<String, Person> allPeople  = new HashMap<String, Person> ();
+	final HashMap<String, String> allPeople  = new HashMap<String, String> ();
 
 	private Person person = null;
 	private int personNum = 0;
@@ -102,18 +102,24 @@ public class FileIO <T extends Comparable<T>> implements Iterable<T>{
 			if (allUserTokens.length == 5){
 
 				for(Entry<String, Person> entry : people.entrySet()){
-					Person name = entry.getValue();
-			
+					String name = allUserTokens[0];
+					String gender = allUserTokens[1];
+					Integer birthYear = Integer.parseInt(allUserTokens[2]);
+					
 					
 					
 					// if the character is not ? 
-					Person p = new Person(allUserTokens[0], allUserTokens[1], Integer.parseInt(allUserTokens[2]),person.getMother(), person.getFather());
-					//System.out.println(n.toString());
-					//System.out.println(pQueue.poll());
+					
+					/*
+					 * datatype disaster
+					 */
+					//Person p = new Person(allUserTokens[0], allUserTokens[1], Integer.parseInt(allUserTokens[2]), allUserTokens[3],  allUserTokens[4]);
+//					allPeople.put(name, p);
+//					System.out.println(allPeople.toString());
 					
 					
 				}
-			
+				
 			//add();
 				
 				
@@ -122,7 +128,8 @@ public class FileIO <T extends Comparable<T>> implements Iterable<T>{
 
 			}
 			
-			
+			//System.out.println(allPeople.toString());
+
 			
 		}
 		secondInput.close();

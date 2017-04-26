@@ -1,27 +1,20 @@
 package models;
 
+import java.util.Iterator;
 
-
-	/*
+/*
 	 * From the given file, a person has:
 	 * Name
 	 * Gender
 	 * Year of Birth
 	 * Mother (if known)
 	 * Father (if known)
-	 * 
-	 * Also we can add:
-	 * Date of birth
-	 * Grandmother
-	 * Grandfather
-
-
 	 */
-	public class Person implements Comparable <Person>{
-		
+	public class Person <T extends Comparable<T>> implements Iterable<T>{
+
 		//in order based on file
 		private String name;
-		private char gender;
+		private String gender;
 		private int birthYear;
 	
 		private Person mother;
@@ -38,41 +31,63 @@ package models;
 		 * @param grandmother
 		 * @param grandfather
 		 */
-		public Person(String name, char gender, int birthYear, Person mother, Person father) {
+		public Person(String name, String gender, int birthYear) {
+			super();
+
+			this.name = name;
+			this.gender = gender;
+			this.birthYear = birthYear;
+			
+			
+	}
+
+		
+		//            name                   gender       birthyear       mother name   fathers name
+		public Person(String name, String gender, int birthYear, Person mother, Person father) {
 			super();
 			this.name = name;
 			this.gender = gender;
 			this.birthYear = birthYear;
 			this.mother = mother;
 			this.father = father;
-			
-	}
+		
+		}
 
-		
-		
+
+
 		public String getName() {
 			return name;
 		}
 
 	
+		
+
+
+
+		/* (non-Javadoc)
+		 * @see java.lang.Object#toString()
+		 */
 		@Override
 		public String toString() {
-			return "Person [" + (name != null ? "name=" + name + ", " : "") + "gender=" + gender + ", birthYear="
-					+ birthYear + ", " + (mother != null ? "mother=" + mother + ", " : "")
-					+ (father != null ? "father=" + father : "") + "]";
+			return "["+(name != null ? "name=" + name + "," : "")
+					+ (gender != null ? "gender=" + gender + "," : "") + "birthYear=" + birthYear + ","
+					+ (mother != null ? "mother=" + mother + "," : "") + (father != null ? "father=" + father : "")
+					+ "]" + "\n";
 		}
-
 
 
 		public void setName(String name) {
 			this.name = name;
 		}
-
-		public char getGender() {
+		 
+		public String getName(String name){
+			return name;
+		}
+		public String getGender() {
 			return gender;
 		}
 
-		public void setGender(char gender) {
+		public void setGender(String gender) {
 			this.gender = gender;
 		}
 
@@ -101,11 +116,21 @@ package models;
 		}
 
 	
-		@Override
 		public int compareTo(Person p) {
 			// TODO Auto-generated method stub
 			return name.compareTo(p.getName());
 		}
+
+
+		@Override
+		public Iterator<T> iterator() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+
+		
+		
 
 		
 		

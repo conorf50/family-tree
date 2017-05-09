@@ -16,9 +16,8 @@ import java.util.Iterator;
 		private String name;
 		private String gender;
 		private int birthYear;
-	
-		private Person mother;
-		private Person father;
+		private Person<String> mother;
+		private Person<String> father;
 
 
 
@@ -28,37 +27,43 @@ import java.util.Iterator;
 		 * @param birthYear
 		 * @param mother
 		 * @param father
-		 * @param grandmother
-		 * @param grandfather
 		 */
-		public Person(String name, String gender, int birthYear) {
-			super();
-
-			this.name = name;
-			this.gender = gender;
-			this.birthYear = birthYear;
-			
-			
-	}
+//		public Person(String name, String gender, int birthYear) {
+//			super();
+//
+//			this.name = name;
+//			this.gender = gender;
+//			this.birthYear = birthYear;
+//			
+//			
+//	}
 
 		
 		/*
 		 * We store Person objects for the mother and father because they are seperate people.
 		 * We can also compare these as well 
 		 */
-		public Person(String name, String gender, int birthYear, Person mother, Person father) {
+		public Person(String name, String gender, int birthYear, Person<String> mother, Person<String> father) {
 			super();
 			this.name = name;
 			this.gender = gender;
 			this.birthYear = birthYear;
-			this.mother = (Person)mother;
-			this.father = (Person)father;
+			this.mother = mother;
+			this.father = father;
 		
 		}
 
 
 
 	
+
+		public Person() {
+			// TODO Auto-generated constructor stub
+		}
+
+
+
+
 
 		public String getName() {
 			return name;
@@ -104,24 +109,24 @@ import java.util.Iterator;
 			this.birthYear = birthYear;
 		}
 
-		public Person getMother() {
+		public Person<String> getMother() {
 			return mother;
 		}
 
-		public void setMother(Person mother) {
+		public void setMother(Person<String> mother) {
 			this.mother = mother;
 		}
 
-		public Person getFather() {
+		public Person<String> getFather() {
 			return father;
 		}
 
-		public void setFather(Person item) {
-			this.father = (Person )item;
+		public void setFather(Person<String> father) {
+			this.father = father;
 		}
 
 	
-		public int compareTo(Person p) {
+		public int compareTo(Person<?> p) {
 			// TODO Auto-generated method stub
 			return name.compareTo(p.getName());
 		}

@@ -97,10 +97,7 @@ public class FileIO<T extends Comparable<T>> implements Iterable<T> {
 			String gender = allUserTokens[1];
 			Integer birthYear = Integer.parseInt(allUserTokens[2]);
 
-			Person p = (Person) people.get(name);
-			// a is the new empty person that was initalised earlier
-			Person mother = p.getMother();
-			Person father = p.getFather();
+		
 
 			/*
 			 * 
@@ -111,6 +108,11 @@ public class FileIO<T extends Comparable<T>> implements Iterable<T> {
 
 				for (Entry<String, Person> entry : people.entrySet()) {
 
+					Person p = (Person) people.get(name);
+					// a is the new empty person that was initalised earlier
+					Person mother = p.getMother();
+					Person father = p.getFather();
+					
 					// if the character is not ?
 					if (!allUserTokens[3].equals("?")) {
 						/*
@@ -121,21 +123,17 @@ public class FileIO<T extends Comparable<T>> implements Iterable<T> {
 								mother, father);
 						allPeople.put(name, pers);
 						// System.out.println(allPeople.toString());
-						//add(pers);
 					} else if (allUserTokens[3].equals("?")) {
 						Person pers = new Person(allUserTokens[0], allUserTokens[1], Integer.parseInt(allUserTokens[2]),
 								null, father);
 						allPeople.put(name, pers);
 
-						//add(pers);
 
 						allPeople.put(name, pers);
 					} else if (allUserTokens[4].equals("?")) {
 						Person pers = new Person(allUserTokens[0], allUserTokens[1], Integer.parseInt(allUserTokens[2]),
 								mother, null);
-					//	add(pers);
 
-						add(pers);
 						allPeople.put(name, pers);
 					}
 

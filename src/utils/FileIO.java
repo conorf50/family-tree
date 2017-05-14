@@ -16,7 +16,7 @@ import models.Person;
 
 public class FileIO<T extends Comparable<T>> implements Iterable<T> {
 
-	ListModel lm = new DefaultListModel();
+	//ListModel lm = new DefaultListModel();
 
 	// map used to match parents to children
 	final HashMap<String, Person> people = new HashMap<String, Person>();
@@ -94,9 +94,7 @@ public class FileIO<T extends Comparable<T>> implements Iterable<T> {
 			String[] allUserTokens = userDetails.split(delims);
 
 			String name = allUserTokens[0];
-			String gender = allUserTokens[1];
-			Integer birthYear = Integer.parseInt(allUserTokens[2]);
-
+			
 		
 
 			/*
@@ -110,32 +108,14 @@ public class FileIO<T extends Comparable<T>> implements Iterable<T> {
 
 					Person p = (Person) people.get(name);
 					// a is the new empty person that was initalised earlier
-					Person mother = p.getMother();
-					Person father = p.getFather();
-					
-					// if the character is not ?
-					if (!allUserTokens[3].equals("?")) {
-						/*
-						 * datatype disaster
-						 */
+					String motherName = allUserTokens[3];
+					String fatherName = allUserTokens[4];
+					Person mother = (Person) people.get(motherName);
+					Person father = (Person) people.get(fatherName);
+					p.setMother(mother);
+					p.setFather(father);
 
-						Person pers = new Person(allUserTokens[0], allUserTokens[1], Integer.parseInt(allUserTokens[2]),
-								mother, father);
-						allPeople.put(name, pers);
-						// System.out.println(allPeople.toString());
-					} else if (allUserTokens[3].equals("?")) {
-						Person pers = new Person(allUserTokens[0], allUserTokens[1], Integer.parseInt(allUserTokens[2]),
-								null, father);
-						allPeople.put(name, pers);
-
-
-						allPeople.put(name, pers);
-					} else if (allUserTokens[4].equals("?")) {
-						Person pers = new Person(allUserTokens[0], allUserTokens[1], Integer.parseInt(allUserTokens[2]),
-								mother, null);
-
-						allPeople.put(name, pers);
-					}
+					allPeople.put(null, p);
 
 				}
 
@@ -149,46 +129,46 @@ public class FileIO<T extends Comparable<T>> implements Iterable<T> {
 
 	}
 
-	@SuppressWarnings("unchecked")
-	// for adding people to a family
-	public void add(Person pers) {
-		// check if the tree is empty, if it is we set the
-		// input to be the root of the tree by casting it as a Node
-		if (isEmpty()) {
-			person = (Person) pers;
-			personNum++;
-		}
-		// if there is already items in the Tree, call the second
-		// addR method to handle it
-		else {
-			addR(pers, person);
-			personNum++;
-		}
-
-	}
-
-	@SuppressWarnings("unchecked")
-	private void addR(Person pers, Person current) {
-		// check if what's coming in is less than
-		// the current Node
-
-		// eg; item.lessThan(current)
-		if (pers.compareTo(current) > 0) {
-			if (current.getMother() == null)
-				// cast the left item as a Node
-				current.setMother((Person) pers);
-			else
-				addR(pers, current.getMother());
-		}
-
-		// else the item goes on the right child
-		else {
-			if (current.getFather() == null)
-				current.setFather((Person) pers);
-			else
-				addR(pers, current.getFather());
-		}
-	}
+//	@SuppressWarnings("unchecked")
+//	// for adding people to a family
+//	public void add(Person pers) {
+//		// check if the tree is empty, if it is we set the
+//		// input to be the root of the tree by casting it as a Person
+//		if (isEmpty()) {
+//			person = (Person) pers;
+//			personNum++;
+//		}
+//		// if there is already items in the Tree, call the second
+//		// addR method to handle it
+//		else {
+//			addR(pers, person);
+//			personNum++;
+//		}
+//
+//	}
+//
+//	@SuppressWarnings("unchecked")
+//	private void addR(Person pers, Person current) {
+//		// check if what's coming in is less than
+//		// the current Person
+//
+//		// eg; item.lessThan(current)
+//		if (pers.compareTo(current) > 0) {
+//			if (current.getMother() == null)
+//				// cast the left item as a Person
+//				current.setMother((Person) pers);
+//			else
+//				addR(pers, current.getMother());
+//		}
+//
+//		// else the item goes on the right child
+//		else {
+//			if (current.getFather() == null)
+//				current.setFather((Person) pers);
+//			else
+//				addR(pers, current.getFather());
+//		}
+//	}
 	// end of add methods
 
 	@Override

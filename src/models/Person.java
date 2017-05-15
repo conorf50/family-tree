@@ -18,7 +18,6 @@ import java.util.Iterator;
 		private int birthYear;
 		private Person<String> mother;
 		private Person<String> father;
-		private int personNum = 0;
 
 
 
@@ -44,9 +43,8 @@ import java.util.Iterator;
 		 * We store Person objects for the mother and father because they are seperate people.
 		 * We can also compare these as well 
 		 */
-		public Person(Integer personNum,String name, String gender, int birthYear, Person<String> mother, Person<String> father) {
+		public Person(String name, String gender, int birthYear, Person<String> mother, Person<String> father) {
 			super();
-			this.personNum = personNum;
 			this.name = name;
 			this.gender = gender;
 			this.birthYear = birthYear;
@@ -86,14 +84,7 @@ import java.util.Iterator;
 		/* (non-Javadoc)
 		 * @see java.lang.Object#toString()
 		 */
-		@Override
-		public String toString() {
-			return "Number=" + " " + personNum  + ", " + (name != null ? "name=" + name + ", " : "")
-					+ (gender != null ? "gender=" + gender + ", " : "") + "birthYear=" + birthYear + ", "
-					+ (mother != null ? "mother=" + mother + ", " : "")
-					+ (father != null ? "father=" + father + ", " : "");
-		}
-
+	
 
 
 
@@ -101,6 +92,21 @@ import java.util.Iterator;
 		public String getName(String name){
 			return name;
 		}
+		/* (non-Javadoc)
+		 * @see java.lang.Object#toString()
+		 */
+		@Override
+		public String toString() {
+			return "Person [" + (name != null ? "name=" + name + ", " : "")
+					+ (gender != null ? "gender=" + gender + ", " : "") + "birthYear=" + birthYear + ", "
+					+ (mother != null ? "mother=" + mother + ", " : "") + (father != null ? "father=" + father : "")
+					+ "]";
+		}
+
+
+
+
+
 		public String getGender() {
 			return gender;
 		}

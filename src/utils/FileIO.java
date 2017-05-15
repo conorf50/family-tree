@@ -19,11 +19,11 @@ public class FileIO<T extends Comparable<T>> implements Iterable<T> {
 	//ListModel lm = new DefaultListModel();
 
 	// map used to match parents to children
-	final HashMap<String, Person> people = new HashMap<String, Person>();
+	final static HashMap<String, Person> people = new HashMap<String, Person>();
 
 	// map that contains all relationships
 	// The integer here is the person number;
-	final HashMap<Integer, Person> allPeople = new HashMap<Integer, Person>();
+	final static HashMap<String, Person> allPeople = new HashMap<String, Person>();
 
 	private Person person = null;
 	// A number to keep track of the amount of people we add into the alPeople
@@ -39,7 +39,7 @@ public class FileIO<T extends Comparable<T>> implements Iterable<T> {
 		}
 	}
 
-	public void importer() throws FileNotFoundException {
+	public static void importer(File usersFile) throws FileNotFoundException {
 		/*
 		 * Import in 2 steps First step: only count first 3 tokens Second step:
 		 * count the last two tokens only Third step: using the fName from the
@@ -52,7 +52,6 @@ public class FileIO<T extends Comparable<T>> implements Iterable<T> {
 		/*
 		 * First stage of file importing
 		 */
-		File usersFile = new File("large-database.txt");
 		Scanner firstInput = new Scanner(usersFile);
 		String delims = " ";// each field in the file is separated(delimited)
 
@@ -68,7 +67,7 @@ public class FileIO<T extends Comparable<T>> implements Iterable<T> {
 			if (userTokens.length == 5) {
 
 				String fName = userTokens[0];
-				Person p = new Person(personNum,userTokens[0], userTokens[1], Integer.parseInt(userTokens[2]), null, null);
+				Person p = new Person(userTokens[0], userTokens[1], Integer.parseInt(userTokens[2]), null, null);
 				people.put(fName, p);
 			//	System.out.println(personNum);
 
@@ -106,7 +105,7 @@ public class FileIO<T extends Comparable<T>> implements Iterable<T> {
 
 			if (allUserTokens.length == 5) {
 
-				for (Entry<String, Person> entry : people.entrySet()) {
+			//	for (Entry<String, Person> entry : people.entrySet()) {
 
 
 					Person p = (Person) people.get(name);
@@ -116,23 +115,23 @@ public class FileIO<T extends Comparable<T>> implements Iterable<T> {
 					Person father = (Person) people.get(fatherName);
 					p.setMother(mother);
 					p.setFather(father);
-					allPeople.put(personNum, p);
+					allPeople.put(name, p);
 					//personNum ++;
 
 
-				}
+			//	}
 				
 
 			}
 		
-			System.out.println(allPeople.toString());
 			
 		}		
 
 		secondInput.close();
 		
 
-		/// System.out.println(people.toString());
+	System.out.println(allPeople.toString());
+
 
 	}
 

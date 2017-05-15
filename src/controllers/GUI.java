@@ -13,6 +13,7 @@ import javax.swing.JToolBar;
 import models.Person;
 import utils.FileIO;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JList;
@@ -26,17 +27,25 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.awt.event.ActionEvent;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.event.ListSelectionEvent;
 
 public class GUI {
 
 	protected static final String FileName = null;
 	private JFrame frmFamilyTree;
+	DefaultListModel<String>  PList;
+
+	
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
 		FileIO imports = new FileIO();
+		
+		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -68,7 +77,7 @@ public class GUI {
 		frmFamilyTree.setSize(new Dimension(800, 600));
 		frmFamilyTree.setPreferredSize(new Dimension(800, 600));
 		frmFamilyTree.setTitle("Family Tree v1.0");
-		frmFamilyTree.setBounds(100, 100, 450, 300);
+		frmFamilyTree.setBounds(300, 200, 450, 300);
 		frmFamilyTree.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JMenuBar menuBar = new JMenuBar();
@@ -101,7 +110,12 @@ public class GUI {
 
 						}
 						
-						
+						else{
+							for(String key : FileIO.allPeople.keySet()) {
+								System.out.println(key);
+								PList.addElement(key);
+							}
+						}
 					} catch (IOException e1) {
 						// TODO Auto-generated catch block
 						JOptionPane.showMessageDialog(null, "File was empty or corrupt");
@@ -174,15 +188,25 @@ public class GUI {
 		JLabel personNum = new JLabel("Total People = " +  FileIO.getallPeopleSize());
 		personNum.setBounds(271, 378, 435, 14);
 		frmFamilyTree.getContentPane().add(personNum);
+		PList = new DefaultListModel<String>();
+
+		JList allPeople = new JList(PList);		
+	
 		
-		JScrollPane scrollPane = new JScrollPane();
+		
+				allPeople.addListSelectionListener(new ListSelectionListener() {
+					public void valueChanged(ListSelectionEvent arg0) {
+					}
+				});
+				allPeople.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+				//allPeople.setPreferredSize(new Dimension(50, 180));
+			//	allPeople.setBounds(1, 1, 106, 250);
+			//	frmFamilyTree.getContentPane().add(allPeople);
+		
+		JScrollPane scrollPane = new JScrollPane(allPeople);
 		scrollPane.setPreferredSize(new Dimension(50, 150));
-		scrollPane.setBounds(20, 520, 177, -495);
+		scrollPane.setBounds(0, 0, 170, 540);
 		frmFamilyTree.getContentPane().add(scrollPane);
 		
-		JList allPeople = new JList();
-		allPeople.setPreferredSize(new Dimension(50, 180));
-		allPeople.setBounds(30, 520, 177, 477);
-		frmFamilyTree.getContentPane().add(allPeople);
 	}
 }

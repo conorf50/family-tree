@@ -28,8 +28,8 @@ public class FileIO<T extends Comparable<T>> implements Iterable<T> {
 	/**
 	 * @return the people
 	 */
-	public static HashMap<String, Person> getPeople() {
-		return people;
+	public static HashMap<String, Person> getAllPeople() {
+		return allPeople;
 	}
 	
 	public static Integer getallPeopleSize() {

@@ -28,15 +28,7 @@ import java.util.Iterator;
 		 * @param mother
 		 * @param father
 		 */
-//		public Person(String name, String gender, int birthYear) {
-//			super();
-//
-//			this.name = name;
-//			this.gender = gender;
-//			this.birthYear = birthYear;
-//			
-//			
-//	}
+
 
 		
 		/*

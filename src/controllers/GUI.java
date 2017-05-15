@@ -7,8 +7,10 @@ import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JToolBar;
 
+import models.Person;
 import utils.FileIO;
 
 import javax.swing.JButton;
@@ -94,8 +96,16 @@ public class GUI {
 					FileNameText.setText(FileName);
 					try {
 						FileIO.importer(usersFile);
+						if(FileIO.allPeople.size() == 0){
+							JOptionPane.showMessageDialog(null, "File was empty or corrupt");
+
+						}
+						
+						
 					} catch (IOException e1) {
 						// TODO Auto-generated catch block
+						JOptionPane.showMessageDialog(null, "File was empty or corrupt");
+
 						e1.printStackTrace();
 					}
 				}
@@ -106,8 +116,6 @@ public class GUI {
 		});
 		menuBar.add(btnOpen);
 		
-		JButton btnAbout = new JButton("About");
-		menuBar.add(btnAbout);
 		
 		JButton btnExit = new JButton("Exit");
 		btnExit.addActionListener(new ActionListener() {
@@ -163,7 +171,7 @@ public class GUI {
 		fatherName.setBounds(554, 318, 152, 22);
 		frmFamilyTree.getContentPane().add(fatherName);
 		
-		JLabel personNum = new JLabel("Person " + "personNum"  + "of " +  "people.size()");
+		JLabel personNum = new JLabel("Total People = " +  FileIO.getallPeopleSize());
 		personNum.setBounds(271, 378, 435, 14);
 		frmFamilyTree.getContentPane().add(personNum);
 		

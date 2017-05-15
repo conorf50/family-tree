@@ -23,7 +23,19 @@ public class FileIO<T extends Comparable<T>> implements Iterable<T> {
 
 	// map that contains all relationships
 	// The integer here is the person number;
-	final static HashMap<String, Person> allPeople = new HashMap<String, Person>();
+	public final static HashMap<String, Person> allPeople = new HashMap<String, Person>();
+
+	/**
+	 * @return the people
+	 */
+	public static HashMap<String, Person> getPeople() {
+		return people;
+	}
+	
+	public static Integer getallPeopleSize() {
+		return allPeople.size();
+	}
+
 
 	private Person person = null;
 	// A number to keep track of the amount of people we add into the alPeople

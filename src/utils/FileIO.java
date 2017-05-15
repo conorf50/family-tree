@@ -22,7 +22,8 @@ public class FileIO<T extends Comparable<T>> implements Iterable<T> {
 	final HashMap<String, Person> people = new HashMap<String, Person>();
 
 	// map that contains all relationships
-	final HashMap<String, Person> allPeople = new HashMap<String, Person>();
+	// The integer here is the person number;
+	final HashMap<Integer, Person> allPeople = new HashMap<Integer, Person>();
 
 	private Person person = null;
 	// A number to keep track of the amount of people we add into the alPeople
@@ -67,8 +68,9 @@ public class FileIO<T extends Comparable<T>> implements Iterable<T> {
 			if (userTokens.length == 5) {
 
 				String fName = userTokens[0];
-				Person p = new Person(userTokens[0], userTokens[1], Integer.parseInt(userTokens[2]), null, null);
+				Person p = new Person(personNum,userTokens[0], userTokens[1], Integer.parseInt(userTokens[2]), null, null);
 				people.put(fName, p);
+			//	System.out.println(personNum);
 
 			}
 		}
@@ -106,70 +108,34 @@ public class FileIO<T extends Comparable<T>> implements Iterable<T> {
 
 				for (Entry<String, Person> entry : people.entrySet()) {
 
+
 					Person p = (Person) people.get(name);
-					// a is the new empty person that was initalised earlier
 					String motherName = allUserTokens[3];
 					String fatherName = allUserTokens[4];
 					Person mother = (Person) people.get(motherName);
 					Person father = (Person) people.get(fatherName);
 					p.setMother(mother);
 					p.setFather(father);
+					allPeople.put(personNum, p);
+					//personNum ++;
 
-					allPeople.put(null, p);
 
 				}
+				
 
 			}
+		
 			System.out.println(allPeople.toString());
+			
 		}		
 
 		secondInput.close();
+		
 
 		/// System.out.println(people.toString());
 
 	}
 
-//	@SuppressWarnings("unchecked")
-//	// for adding people to a family
-//	public void add(Person pers) {
-//		// check if the tree is empty, if it is we set the
-//		// input to be the root of the tree by casting it as a Person
-//		if (isEmpty()) {
-//			person = (Person) pers;
-//			personNum++;
-//		}
-//		// if there is already items in the Tree, call the second
-//		// addR method to handle it
-//		else {
-//			addR(pers, person);
-//			personNum++;
-//		}
-//
-//	}
-//
-//	@SuppressWarnings("unchecked")
-//	private void addR(Person pers, Person current) {
-//		// check if what's coming in is less than
-//		// the current Person
-//
-//		// eg; item.lessThan(current)
-//		if (pers.compareTo(current) > 0) {
-//			if (current.getMother() == null)
-//				// cast the left item as a Person
-//				current.setMother((Person) pers);
-//			else
-//				addR(pers, current.getMother());
-//		}
-//
-//		// else the item goes on the right child
-//		else {
-//			if (current.getFather() == null)
-//				current.setFather((Person) pers);
-//			else
-//				addR(pers, current.getFather());
-//		}
-//	}
-	// end of add methods
 
 	@Override
 	public Iterator<T> iterator() {

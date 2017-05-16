@@ -145,6 +145,22 @@ import java.util.Iterator;
 		}
 
 
+
+
+
+		public Person<String> getFatherName() {
+
+			return father;
+		}
+
+		public Person<String> getMotherName() {
+
+			return mother;
+		}
+
+
+		
+
 		
 		
 

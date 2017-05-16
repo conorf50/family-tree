@@ -52,6 +52,26 @@ public class GUI {
 	JLabel amountOfPeople;
 	Person person;
 	
+	// for a new Person (hidden by default)
+	private JFrame addNewPerson;
+	private JTextField NfirstName;
+	private JTextField NyearOfBirth;
+	private JTextField NnameOfMother;
+	private JTextField NnameOfFather;
+	private JTextField NnameOfGrandMother;
+	private JTextField NnameOfGrandFather;
+	
+	//data used to create a new Person
+		// 'N' denotes a field associated with a new Person
+		private String Nname;
+		private String Ngender;
+		private Integer NbirthYear;
+		private String NmotherName;
+		private String NfatherName;
+		private String NgrandMotherName;
+		private String NgrandFatherName;
+
+	
 
 	/**
 	 * Launch the application.
@@ -65,6 +85,7 @@ public class GUI {
 				try {
 					GUI window = new GUI();
 					window.frmFamilyTree.setVisible(true);
+					window.addNewPerson.setVisible(false);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -93,6 +114,19 @@ public class GUI {
 		frmFamilyTree.setTitle("Family Tree v1.0");
 		frmFamilyTree.setBounds(300, 200, 450, 300);
 		frmFamilyTree.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		// Form used to add a new Person
+		addNewPerson = new JFrame();
+		addNewPerson.setTitle("Add Person");
+		addNewPerson.setResizable(false);
+		addNewPerson.setSize(new Dimension(400, 450));
+		addNewPerson.getContentPane().setMinimumSize(new Dimension(400, 400));
+		addNewPerson.getContentPane().setSize(new Dimension(400, 4000));
+		addNewPerson.getContentPane().setPreferredSize(new Dimension(400, 400));
+		addNewPerson.setPreferredSize(new Dimension(400, 451));
+		addNewPerson.getContentPane().setLayout(null);
+		
+		
 		
 		JMenuBar menuBar = new JMenuBar();
 		frmFamilyTree.setJMenuBar(menuBar);
@@ -156,6 +190,58 @@ public class GUI {
 				System.exit(0);
 			}
 		});
+		
+		JButton btnAdd = new JButton("Add");
+		btnAdd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				// add a new Person using provided data
+				addNewPerson.setVisible(true);
+				//call add method with all parameters
+				
+					// We must check what the user entered
+				 if (NfirstName.getText().matches("\\w+")
+						    && (Ngender.equals("M") || Ngender.equals("F"))    // 
+						    &&(NyearOfBirth.getText().matches("\\d+"))        // "\\d+ will match only numbers
+						 	|| (NnameOfFather.getText().matches("\\w+")) 
+						 	|| (NnameOfMother.getText().matches("\\w+"))
+						    || (NnameOfGrandMother.getText().matches("\\w+")) 
+						    || (NnameOfGrandFather.getText().matches("\\w+"))) // "\\w+" matches only letters
+						 {
+						 	// create new person with all  this info
+					 	Nname = NfirstName.getText();	
+					 	NbirthYear = Integer.parseInt(NyearOfBirth.getText());
+					 	NmotherName = NnameOfMother.getText();	
+					 	NfatherName = NnameOfFather.getText();	
+					 	NgrandMotherName = NnameOfGrandMother.getText();	
+					 	NgrandFatherName = NnameOfGrandFather.getText();	 	
+					 
+					 
+					 System.out.println(Nname + NbirthYear + Ngender + NmotherName + NfatherName + NgrandMotherName + NgrandFatherName);
+					 //Person p = new Person(name, gender, birthYear, (Person) mother, (Person) father)
+						 }
+						 else {
+							 JOptionPane.showMessageDialog(null, "Please check you've provided the correct information \n Names shoud only contain letters\n "
+							 		+ "Birth Year should be an integer");
+							 NfirstName.setText("");			 
+							 NyearOfBirth.setText("");
+						 	NnameOfMother.setText("");
+					     	NnameOfFather.setText("");
+							NnameOfGrandMother.setText("");
+							NnameOfGrandFather.setText("");
+							 }
+						
+
+				
+				
+				
+			
+				
+				
+				
+			}
+		});
+		menuBar.add(btnAdd);
 		menuBar.add(btnExit);
 		frmFamilyTree.getContentPane().setLayout(null);
 		
@@ -168,7 +254,7 @@ public class GUI {
 		frmFamilyTree.getContentPane().add(lblBirthYear);
 		
 		JLabel lblGender = new JLabel("Gender");
-		lblGender.setBounds(271, 230, 80, 21);
+		lblGender.setBounds(266, 233, 80, 21);
 		frmFamilyTree.getContentPane().add(lblGender);
 		
 		JLabel lblMotherName = new JLabel("Name of mother");
@@ -178,6 +264,41 @@ public class GUI {
 		JLabel lblFatherName = new JLabel("Name of father");
 		lblFatherName.setBounds(269, 320, 106, 21);
 		frmFamilyTree.getContentPane().add(lblFatherName);
+		
+		
+		// labels for the add new person dialog
+		
+		JLabel lblAddANew = new JLabel("Add a new person using the fields below. ");
+		lblAddANew.setBounds(97, 11, 287, 14);
+		addNewPerson.getContentPane().add(lblAddANew);
+
+		JLabel NlblName = new JLabel("Name *");
+		NlblName.setBounds(10, 63, 85, 14);
+		addNewPerson.getContentPane().add(NlblName);
+
+		JLabel NlblYearOfBirth = new JLabel("Year of Birth *");
+		NlblYearOfBirth.setBounds(10, 107, 125, 14);
+		addNewPerson.getContentPane().add(NlblYearOfBirth);
+
+		JLabel NlblNameOfMother = new JLabel("Name of mother");
+		NlblNameOfMother.setBounds(10, 193, 182, 14);
+		addNewPerson.getContentPane().add(NlblNameOfMother);
+
+		JLabel NlblNameOfFather = new JLabel("Name of father");
+		NlblNameOfFather.setBounds(10, 236, 182, 14);
+		addNewPerson.getContentPane().add(NlblNameOfFather);
+
+		JLabel NlblNameOfGrandfather = new JLabel("Name of grandfather");
+		NlblNameOfGrandfather.setBounds(10, 322, 182, 14);
+		addNewPerson.getContentPane().add(NlblNameOfGrandfather);
+
+		JLabel NlblNameOfGrandmother = new JLabel("Name of grandmother");
+		NlblNameOfGrandmother.setBounds(10, 278, 182, 14);
+		addNewPerson.getContentPane().add(NlblNameOfGrandmother);
+
+		JLabel NlblNewLabel = new JLabel("Mandatory fields are marked with ' * '");
+		NlblNewLabel.setBounds(97, 27, 287, 14);
+		addNewPerson.getContentPane().add(NlblNewLabel);
 		
 		
 		// a person's first name
@@ -212,6 +333,79 @@ public class GUI {
 		fatherName.setBounds(554, 318, 152, 22);
 		frmFamilyTree.getContentPane().add(fatherName);
 		
+		
+		// new person dialog
+		NfirstName = new JTextField();
+		NfirstName.setBounds(202, 60, 160, 20);
+		addNewPerson.getContentPane().add(NfirstName);
+
+		
+		NfirstName.setColumns(10);
+
+		NyearOfBirth = new JTextField();
+		NyearOfBirth.setColumns(10);
+		NyearOfBirth.setBounds(202, 104, 160, 20);
+		addNewPerson.getContentPane().add(NyearOfBirth);
+
+		
+		NnameOfMother = new JTextField();
+		NnameOfMother.setColumns(10);
+		NnameOfMother.setBounds(202, 190, 160, 20);
+		addNewPerson.getContentPane().add(NnameOfMother);
+
+		 
+		
+		
+		NnameOfFather = new JTextField();
+		NnameOfFather.setColumns(10);
+		NnameOfFather.setBounds(202, 233, 160, 20);
+		addNewPerson.getContentPane().add(NnameOfFather);
+
+		
+
+		NnameOfGrandMother = new JTextField();
+		NnameOfGrandMother.setColumns(10);
+		NnameOfGrandMother.setBounds(202, 275, 160, 20);
+		addNewPerson.getContentPane().add(NnameOfGrandMother);
+
+		 
+
+		NnameOfGrandFather = new JTextField();
+		NnameOfGrandFather.setColumns(10);
+		NnameOfGrandFather.setBounds(202, 319, 160, 20);
+		addNewPerson.getContentPane().add(NnameOfGrandFather);
+
+		JRadioButton genderM = new JRadioButton("Male");
+		genderM.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//set gender string to be "M"
+				Ngender = "M";
+			}
+		});
+		genderM.setBounds(202, 144, 71, 23);
+		addNewPerson.getContentPane().add(genderM);
+
+		JRadioButton genderF = new JRadioButton("Female");
+		genderF.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				// set gender string to "F";
+				Ngender = "F";
+			}
+		});
+
+		genderF.setBounds(275, 144, 109, 23);
+		addNewPerson.getContentPane().add(genderF);
+		
+		ButtonGroup genders = new ButtonGroup();
+		genders.add(genderM);
+		genders.add(genderF);
+
+		JLabel NlblGender = new JLabel("Gender *");
+		lblGender.setBounds(10, 148, 85, 14);
+		addNewPerson.getContentPane().add(NlblGender);
+
+		JButton NbtnAdd = new JButton("Add");
 		
 		PList = new DefaultListModel<String>();
 
